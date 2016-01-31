@@ -3,20 +3,9 @@ namespace Admin\Controller;
 
 use Think\Controller;
 
-class WsController extends Controller
+class TwsController extends Controller
 {
-    public function index()
-    {
-        echo "=============1<br / >";
-        echo file_get_contents(__DIR__.'/ws/order.wsdl');
-        echo "2index----------------";
-    }
-
-    public function orderRelationUpdateNotify($orderRelationUpdateNotifyRequest){
-        echo "test";
-    }
-
-    public function order() {
+    public function index(){
         $host = $_SERVER['HTTP_HOST'];
         $module = MODULE_NAME;
         $action = ACTION_NAME;
@@ -28,10 +17,13 @@ class WsController extends Controller
         $server->setClass(get_class($this));
         $server->handle();
     }
-
+    public  function Add($a,$b)
+    {
+        return $a+$b;
+    }
     public function testsoap(){
 //         $soaparray=array("uri"=>"http://10.155.30.170:8880/ws/order.php?wsdl",'soap_version' => SOAP_1_2);
-        $soap = new \SoapClient(null,array( "location" => "http://10.155.30.170:8880/ws/order","uri"=> "index.html", "style"    => SOAP_RPC, "use" => SOAP_ENCODED));
+        $soap = new \SoapClient(null,array( "location" => "http://10.155.30.170:8880/Tws/index","uri"=> "index.html", "style"    => SOAP_RPC, "use" => SOAP_ENCODED));
         echo $soap->Add(1,2);
         unset($soap);
     }

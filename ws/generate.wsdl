@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.example.org/generate/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="generate" targetNamespace="http://www.example.org/generate/">
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+xmlns:tns="http://www.example.org/generate/"
+xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+name="generate" targetNamespace="http://www.example.org/generate/">
   <wsdl:types>
     <xsd:schema targetNamespace="http://www.example.org/generate/">
       <xsd:element name="verifiCodeNewOperation">
