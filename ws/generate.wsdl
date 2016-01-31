@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.example.org/generate/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="generate" targetNamespace="http://www.example.org/generate/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.example.org/generate/">
+      <xsd:element name="verifiCodeNewOperation">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="NewOperationResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="out" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="reSiteRequest">
+    <wsdl:part name="verificodea" type="xsd:string"/>
+    <wsdl:part name="siteID" type="xsd:string"></wsdl:part>	<wsdl:part name="template_id" type="xsd:int"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="reSiteResponse">
+    <wsdl:part name="parameters" type="xsd:int"/>
+  </wsdl:message>
+  <wsdl:message name="getPubSiteInfoRequest">
+  	<wsdl:part name="verificodeb" type="xsd:string"></wsdl:part>
+  	<wsdl:part name="siteID" type="xsd:integer"></wsdl:part>
+  	<wsdl:part name="language" type="xsd:integer"></wsdl:part>
+  	<wsdl:part name="site_type" type="xsd:integer"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getPubSiteInfoResponse">
+  	<wsdl:part name="parameters" type="xsd:string"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="generate">
+    <wsdl:operation name="reSite">
+      <wsdl:input message="tns:reSiteRequest"/>
+      <wsdl:output message="tns:reSiteResponse"/>
+    </wsdl:operation>
+
+    <wsdl:operation name="getPubSiteInfo">
+    	<wsdl:input message="tns:getPubSiteInfoRequest"></wsdl:input>
+    	<wsdl:output message="tns:getPubSiteInfoResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="generateSOAP" type="tns:generate">
+
+  	<soap:binding style="document"
+  		transport="http://schemas.xmlsoap.org/soap/http" />
+  	<wsdl:operation name="reSite">
+
+  		<soap:operation
+  			soapAction="http://www.example.org/generate/reSite" />
+  		<wsdl:input>
+
+  			<soap:body use="literal" />
+  		</wsdl:input>
+  		<wsdl:output>
+
+  			<soap:body use="literal" />
+  		</wsdl:output>
+  	</wsdl:operation>
+  	<wsdl:operation name="reSite">
+
+  		<soap:operation
+  			soapAction="http://www.example.org/generate/reSite" />
+  		<wsdl:input>
+
+  			<soap:body use="literal" />
+  		</wsdl:input>
+  		<wsdl:output>
+
+  			<soap:body use="literal" />
+  		</wsdl:output>
+  	</wsdl:operation>
+  	<wsdl:operation name="getPubSiteInfo">
+  		<soap:operation
+  			soapAction="http://www.example.org/generate/getPubSiteInfo" />
+  		<wsdl:input>
+  			<soap:body use="literal" />
+  		</wsdl:input>
+  		<wsdl:output>
+  			<soap:body use="literal" />
+  		</wsdl:output>
+  	</wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="generate">
+    <wsdl:port binding="tns:generateSOAP" name="generateSOAP">
+      <soap:address location="http://[webdomain]/ws/generate.php"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
