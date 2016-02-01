@@ -16,7 +16,7 @@ class order{
     public function orderRelationUpdateNotify($orderRelationUpdateNotifyRequest){
         echo "test  <br />";
         echo $orderRelationUpdateNotifyRequest;
-    }u
+    }
 }
 
 $buildDomain = '10.155.30.170:8880';
