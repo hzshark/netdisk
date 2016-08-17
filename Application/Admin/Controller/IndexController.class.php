@@ -19,10 +19,11 @@ class IndexController extends Controller
         $password = isset($_POST['password']) ? $_POST['password'] : '';
         $sqlAuth = new Authenticator();
         if ($SQLRet = $sqlAuth->authenticate($username, $password)) {
-            $apps = new Apps();
-            $applist = $apps->showAll();
-            $this->assign("applist", $applist);
-            $this->display('applist','utf-8');
+            $this->success('登入成功', '/User/index', 1);
+//             $apps = new Apps();
+//             $applist = $apps->showAll();
+//             $this->assign("applist", $applist);
+//             $this->display('applist','utf-8');
         }else{
             $this->error($message = 'login error!');
         }
