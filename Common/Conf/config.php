@@ -2,14 +2,14 @@
 return array(
 	//'配置项'=>'配置值'
     'DB_TYPE'           =>  'mysql',     	// 数据库类型
-    'DB_HOST'           =>  '10.155.40.9', 	// 服务器地址
-    'DB_NAME'           =>  'chd',        // 数据库名
-    'DB_USER'           =>  'hzshark',     	// 用户名
+    'DB_HOST'           =>  '192.168.150.22', 	// 服务器地址
+    'DB_NAME'           =>  'netdisk',        // 数据库名
+    'DB_USER'           =>  'netdisk',     	// 用户名
     'DB_PWD'            =>  'aerohive',     	// 密码
     'DB_PORT'           =>  '3306',     	// 端口
     'DB_PREFIX'         =>  '',      	// 数据库表前缀
     'DB_DEBUG'  		=>  true, 			// 数据库调试模式 开启后可以记录SQL日志
-    'SHOW_PAGE_TRACE'   =>	true,   		// 显示页面Trace信息
+    'SHOW_PAGE_TRACE'   =>	false,   		// 显示页面Trace信息
     'DEFAULT_MODULE'     => 'Index', //默认模块
     'MODULE_ALLOW_LIST'    =>    array('Admin'),
 //     'DEFAULT_MODULE'       =>    'Admin',
@@ -23,7 +23,7 @@ return array(
     'URL_PATHINFO_DEPR' => '/', //PATHINFO URL 模式下，各参数之间的分割符号
     'URL_CASE_INSENSITIVE'  =>  true, //设置为true的时候表示URL地址不区分大小写
     'DEFAULT_THEME' => '', //默认模板主题
-    'URL_HTML_SUFFIX' => '.html', //URL伪静态后缀设置
+    'URL_HTML_SUFFIX' => '.html|.mp4', //URL伪静态后缀设置
     'DEFAULT_CHARSET' => 'utf-8', // 默认输出编码
     'DEFAULT_TIMEZONE' => 'PRC', // 默认时区
     'DEFAULT_AJAX_RETURN' => 'JSON', // 默认AJAX 数据返回格式,可选JSON XML ...
@@ -49,6 +49,9 @@ return array(
 
     /* 网站设置 */
     'SITE_TITLE' => 'NetDisk', //网站title
+    
+    'IOS_DOWNLOAD_URL' => '#',
+    'ANDROID_DOWNLOAD_URL' =>'http://t.cn/Rq8E6QI',
 
     /* 网站日志设置 */
     'WEB_LOG_RECORD' => false, // 默认不记录日志
