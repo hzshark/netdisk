@@ -15,7 +15,7 @@ body {
 table {
     *border-collapse: collapse; /* IE7 and lower */
     border-spacing: 0;
-    width: 100%;    
+    width: 100%;
 }
 
 .bordered {
@@ -23,9 +23,9 @@ table {
     -moz-border-radius: 6px;
     -webkit-border-radius: 6px;
     border-radius: 6px;
-    -webkit-box-shadow: 0 1px 1px #ccc; 
-    -moz-box-shadow: 0 1px 1px #ccc; 
-    box-shadow: 0 1px 1px #ccc;         
+    -webkit-box-shadow: 0 1px 1px #ccc;
+    -moz-box-shadow: 0 1px 1px #ccc;
+    box-shadow: 0 1px 1px #ccc;
 }
 
 .bordered tr:hover {
@@ -34,14 +34,14 @@ table {
     -webkit-transition: all 0.1s ease-in-out;
     -moz-transition: all 0.1s ease-in-out;
     -ms-transition: all 0.1s ease-in-out;
-    transition: all 0.1s ease-in-out;     
-}    
-    
+    transition: all 0.1s ease-in-out;
+}
+
 .bordered td, .bordered th {
     border-left: 1px solid #ccc;
     border-top: 1px solid #ccc;
     padding: 10px;
-    text-align: left;    
+    text-align: left;
 }
 
 .bordered th {
@@ -52,11 +52,11 @@ table {
     background-image:     -ms-linear-gradient(top, #ebf3fc, #dce9f9);
     background-image:      -o-linear-gradient(top, #ebf3fc, #dce9f9);
     background-image:         linear-gradient(top, #ebf3fc, #dce9f9);
-    -webkit-box-shadow: 0 1px 0 rgba(255,255,255,.8) inset; 
-    -moz-box-shadow:0 1px 0 rgba(255,255,255,.8) inset;  
-    box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;        
+    -webkit-box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;
+    -moz-box-shadow:0 1px 0 rgba(255,255,255,.8) inset;
+    box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;
     border-top: none;
-    text-shadow: 0 1px 0 rgba(255,255,255,.5); 
+    text-shadow: 0 1px 0 rgba(255,255,255,.5);
 }
 
 .bordered td:first-child, .bordered th:first-child {
@@ -102,18 +102,15 @@ table {
 <h2>User list</h2>
 <table class="bordered">
     <thead>
-    <form action="/User/queryUser" method="post">
+    <form action="/Statistics/index" method="post">
     <tr>
-        <td>Start Time: <input type="text" id="starttime" name="starttime" value="{$starttime}" /></td> 
-        <td>Start Time: <input type="text" id="endtime" name="endtime" value="{$endtime}" /></td> 
-        <td><input type="submit" value="submit" /></td> 
+        <td >Start Time: <input type="text" id="starttime" name="starttime" value="{$starttime}" /></td>
+        <td>Start Time: <input type="text" id="endtime" name="endtime" value="{$endtime}" /></td>
+        <td colspan="2"><input type="submit" value="submit" /></td>
     </tr>
     </form>
     <tr>
-        <th colspan="3">User Count: {$user_count}</th> 
-    </tr>
-    <tr>
-        <th>日期</th>        
+        <th>日期</th>
         <th>体验版新增用户</th>
         <th>下发彩信数</th>
         <th>新注册帐号登入数量</th>
@@ -121,10 +118,11 @@ table {
     </thead>
     <foreach name="data_list" item="vo" >
     <tr>
-        <td>{$vo.userid}</td>        
-        <td>{$vo.mobile}</td>
-		<td>{$vo.indate}</td>    
-    </tr>        
+        <td>{$vo.indate}</td>
+        <td>{$vo.user_count}</td>
+		<td>{$vo.mms_count}</td>
+		<td>{$vo.login_count}</td>
+    </tr>
     </foreach>
 </table>
 
