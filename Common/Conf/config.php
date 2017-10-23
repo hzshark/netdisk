@@ -9,6 +9,17 @@ return array(
     'DB_PORT'           =>  '3306',     	// 端口
     'DB_PREFIX'         =>  '',      	// 数据库表前缀
     'DB_DEBUG'  		=>  true, 			// 数据库调试模式 开启后可以记录SQL日志
+    'DB_CHARSET'        => 'utf8',
+    'MONGODB_CONFIG'    =>array(
+        'db_type' => 'mongo',
+        'db_user' => 'netdisk',//用户名(没有留空)
+        'db_pwd' => 'netdisk_123',//密码（没有留空）
+        'db_host' => '192.168.4.190',//数据库地址
+        'db_port' => '27017',//数据库端口 默认27017
+        'db_charset'=>    'utf8',
+    ),
+    'MONGODB_NAME' => 'netdisk',
+    
     'SHOW_PAGE_TRACE'   =>	false,   		// 显示页面Trace信息
     'DEFAULT_MODULE'     => 'Index', //默认模块
     'MODULE_ALLOW_LIST'    =>    array('Admin'),
