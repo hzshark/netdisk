@@ -11,15 +11,16 @@ return array(
     'DB_DEBUG'  		=>  true, 			// 数据库调试模式 开启后可以记录SQL日志
     'DB_CHARSET'        => 'utf8',
     'MONGODB_CONFIG'    =>array(
+        'database' =>'netdisk',
         'db_type' => 'mongo',
         'db_user' => 'netdisk',//用户名(没有留空)
         'db_pwd' => 'netdisk_123',//密码（没有留空）
-        'db_host' => '192.168.4.190',//数据库地址
+        'db_host' => '192.168.150.21',//数据库地址
         'db_port' => '27017',//数据库端口 默认27017
         'db_charset'=>    'utf8',
     ),
     'MONGODB_NAME' => 'netdisk',
-    
+
     'SHOW_PAGE_TRACE'   =>	false,   		// 显示页面Trace信息
     'DEFAULT_MODULE'     => 'Index', //默认模块
     'MODULE_ALLOW_LIST'    =>    array('Admin'),
@@ -60,7 +61,7 @@ return array(
 
     /* 网站设置 */
     'SITE_TITLE' => 'NetDisk', //网站title
-    
+
     'IOS_DOWNLOAD_URL' => '#',
     'ANDROID_DOWNLOAD_URL' =>'http://t.cn/Rq8E6QI',
 
@@ -68,5 +69,5 @@ return array(
     'WEB_LOG_RECORD' => false, // 默认不记录日志
     'LOG_FILE_SIZE' => 2097152, // 日志文件大小限制
     'LOG_RECORD_LEVEL' => array('EMERG', 'ALERT', 'CRIT', 'ERR', 'WARN', 'NOTIC', 'INFO', 'DEBUG', 'SQL'), // 允许记录的日志级别
-    
+
 );
