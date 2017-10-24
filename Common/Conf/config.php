@@ -64,6 +64,10 @@ return array(
 
     'IOS_DOWNLOAD_URL' => '#',
     'ANDROID_DOWNLOAD_URL' =>'http://t.cn/Rq8E6QI',
+    
+    'UPLOAD_PATH' => '/Uploads/',
+    'UPLOAD_MAX_SIZE' => '52428800',
+    'IOS_DOWNLOAD_URL' => '#',
 
     /* 网站日志设置 */
     'WEB_LOG_RECORD' => false, // 默认不记录日志

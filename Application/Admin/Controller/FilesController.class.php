@@ -85,9 +85,34 @@ class FilesController extends Controller
     }
 
     $filedata = $files->queryFileByHash($tableName, $md5file);
-    $fileBody =
+    $fileBody ='';
     $this->display();
 
 
     }
+    
+    public function createUser(){
+        header("Content-Type:text/html; charset=utf-8");
+        $data_list = [];
+        if (IS_POST){
+        
+        
+        
+        }
+        $this->display('uploadFile', 'UTF-8');
+    }
+    
+    public function uploadFile()
+    {
+        $id = I('post.id');
+        $ret = array('imgid'=>0);
+        $uploader = new Files();
+        $info = $uploader->Webuploader();
+        if (0 == $info["status"]) {
+            var_dump($info);
+        }
+        $ret = array_merge($info, $ret);
+        $this->ajaxReturn($ret);
+    }
+    
 }
