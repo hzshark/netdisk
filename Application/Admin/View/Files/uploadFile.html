@@ -7,12 +7,8 @@
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <meta name="renderer" content="webkit">
 <title></title>
-<link rel="stylesheet" href="__PUBLIC__/css/pintuer.css">
-<link rel="stylesheet" href="__PUBLIC__/css/admin.css">
-<script src="__PUBLIC__/js/jquery.js"></script>
-<script src="__PUBLIC__/js/pintuer.js"></script>
-<script src="__PUBLIC__/js/html5media.min.js"></script>
-
+<link rel="stylesheet" href="__PUBLIC__/CSS/pintuer.css">
+<link rel="stylesheet" href="__PUBLIC__/CSS/admin.css">
 <style type="text/css">
 .btn {
 	position: relative;
@@ -54,35 +50,13 @@
 	}
 }
 </style>
-<script src="__PUBLIC__/js/layer.js"></script>
-<script type="text/javascript">
-	//建立一個可存取到該file的url
-	function getObjectURL(file) {
-		var url = null;
-		if (window.createObjectURL != undefined) { // basic
-			url = window.createObjectURL(file);
-		} else if (window.URL != undefined) { // mozilla(firefox)
-			url = window.URL.createObjectURL(file);
-		} else if (window.webkitURL != undefined) { // webkit or chrome
-			url = window.webkitURL.createObjectURL(file);
-		}
-		return url;
-	}
-	function checkurl() {
-		var url = $("#tburl").val();
-		if (url.substr(0,1).toLowerCase()=="#"|| url.substr(0,7).toLowerCase()=="http://"|| url.substr(0,8).toLowerCase()=="https://"){
-			$("#AddShopping").submit();
-		}else{
-			alert("淘宝链接必须以http://或者https://开头");
-		}
-		}
 
+<script src="__PUBLIC__/JS/jquery.js"></script>
+<script type="text/javascript">
 	$(function() {
 		$("#uploader_files").on("change",function() {
-			var objUrl = getObjectURL(this.files[0]); //获取图片的路径，该路径不是图片在本地的路径
-			if (objUrl) {
-				$("#preview_img").html('<img src="'+objUrl+'" height="100" width="100" />'); //将图片路径存入src中，显示出图片
-			}
+alert($("#uploader_files").val());
+				$("#show_file").html($("#uploader_files").val());
 		});
 	});
 </script>
@@ -90,63 +64,20 @@
 <body>
 	<div class="panel admin-panel">
 		<div class="panel-head" id="add">
-			<strong><span class="icon-pencil-square-o"></span>增加内容</strong>
+			<strong><span class="icon-pencil-square-o"></span>批量导入客户</strong>
 		</div>
 		<div class="body-content">
-			<form method="post" class="form-x" id="AddShopping" name="AddShopping" action="AddShopping" enctype="multipart/form-data"  target="right" >
-				<div class="form-group">
-					<div class="label">
-						<label>所属系列：</label>
-					</div>
-					<div class="field">
-						<select name="programa_id" class="input w50" data-validate="required:请选择分类">
-							<option value="">请选择分类</option>
-							<foreach name="programa" item="vo">
-							<option value="{$vo.id}">{$vo.series_name}-{$vo.name}</option>
-							</foreach>
-						</select>
-						<div class="tips"></div>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="label">
-						<label>商品名称：</label>
-					</div>
-					<div class="field">
-						<input type="text" class="input" name="name" value="" data-validate="required:请输入商品名称" />
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="label">
-						<label>淘宝链接：</label>
-					</div>
-					<div class="field">
-						<input type="text" class="input" id="tburl" name="url" value="" data-validate="required:请输入淘宝链接" />
-					</div>
-				</div>
+			<form method="post" class="form-x" id="uploadFile" name="uploadFile" action="uploadFile" enctype="multipart/form-data"  target="left" >
 				<div class="form-group">
 					<div class="label">
 						<label>预览图片：</label>
 					</div>
 					<div class="field">
-						<div id="up_status" style="display: none">
-							<img src="__PUBLIC__/images/loader.gif" alt="uploading" />
-						</div>
 						<div id="up_btn" class="btn">
-							<span>添加预览图片</span> <input id="uploader_files" type="file" name="uploader_files" />
+							<span>导入Excel</span> <input id="uploader_files" type="file" name="uploader_files" />
 						</div>
-						<p>最大100KB，支持jpg，gif，png格式。</p>
-						<div id="preview_img"></div>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="label">
-						<label>状态：</label>
-					</div>
-					<div class="field">
-						<input name="status" type="radio" value="0" checked="true">
-						下架</input> <input name="status" type="radio" value="1"> 展示</input>
-						<div class="tips"></div>
+						<p>最大5MB，支持jpg，gif，png格式。</p>
+						<div id="show_file"></div>
 					</div>
 				</div>
 				<div class="form-group">
@@ -154,7 +85,7 @@
 						<label></label>
 					</div>
 					<div class="field">
-						<button class="button bg-main icon-check-square-o uploadBtn" onclick="checkurl();" type="button">提交</button>
+						<button class="button bg-main icon-check-square-o uploadBtn"  type="submit">提交</button>
 					</div>
 				</div>
 			</form>
