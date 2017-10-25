@@ -112,7 +112,7 @@ class FilesController extends Controller
             var_dump($info);
         }
         $ret = array_merge($info, $ret);
-        $this->ajaxReturn($ret);
+        $this->show($ret);
     }
     
 }
