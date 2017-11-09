@@ -17,7 +17,7 @@ class FilesController extends Controller
 
 
     }
-
+    $this->display('uploadFile', 'UTF-8');
 
     
 //     $md5file = md5_file($file_name);
@@ -33,21 +33,10 @@ class FilesController extends Controller
 
 //     $filedata = $files->queryFileByHash($tableName, $md5file);
 //     $fileBody ='';
-    $this->show("aaaa");
 
 
     }
     
-    public function createUser(){
-        header("Content-Type:text/html; charset=utf-8");
-        $data_list = [];
-        if (IS_POST){
-        
-        
-        
-        }
-        $this->display('uploadFile', 'UTF-8');
-    }
     
     function paseExcelFile($file_name){
 //         $file_name = __DIR__.'/test.xlsx';
@@ -55,6 +44,7 @@ class FilesController extends Controller
         $extension = strtolower( pathinfo($file_name, PATHINFO_EXTENSION) );
         
         ini_set('max_execution_time', '0');
+//         Vendor('PHPExcel.PHPExcel');
         Vendor('PHPExcel.PHPExcel');
         /**
          * $inputFileType = 'Excel5';
@@ -66,11 +56,11 @@ class FilesController extends Controller
          $inputFileType = 'CSV';
         */
         if ($extension =='xlsx') {
-            $objReader = PHPExcel_IOFactory::createReader('Excel2007');
+            $objReader = \PHPExcel_IOFactory::createReader('Excel2007');
         } else if ($extension =='xls') {
-            $objReader = PHPExcel_IOFactory::createReader('Excel5');
+            $objReader = \PHPExcel_IOFactory::createReader('Excel5');
         } else if ($extension=='csv') {
-            $PHPReader = PHPExcel_IOFactory::createReader('CSV');
+            $PHPReader = \PHPExcel_IOFactory::createReader('CSV');
             //默认输入字符集
             $PHPReader->setInputEncoding('GBK');
             //默认的分隔符
@@ -88,8 +78,8 @@ class FilesController extends Controller
 //         var_dump($highestColumn);
         //循环读取excel文件,读取一条,插入一条
         $data=array();
-        //从第2行开始读取数据
-        for($j=2;$j<=$highestRow;$j++){
+        //从第1nage 行开始读取数据
+        for($j=1;$j<=$highestRow;$j++){
             //从A列读取数据
             for($k='A';$k<=$highestColumn;$k++){
                 // 读取单元格
@@ -109,17 +99,22 @@ class FilesController extends Controller
         if (0 == $info["status"]) {
             $files = $info['msg'];
             foreach ($files as $filename){
-                echo $filename;
-                echo '<br />';
                 $file_data = $this->paseExcelFile($filename);
                 $excel_data = array_merge($file_data, $excel_data);
             }
+            
+            
+            $this->assign("excel_data", $excel_data);
+            
+            $this->display();
+            
             $capacity = 8 * 1024 * 1024 * 1024;
-            $reg_ret = $user->RegistUser($umobile, $password, $capacity);
+            //$reg_ret = $user->RegistUser($umobile, $password, $capacity);
             echo "====================";
+            var_dump($excel_data);
             $this->show($excel_data);
         }else{
-            $this->error("文件上传失败，请重新上传",'Files/index');
+            $this->error("文件上传失败，请重新上传",'/Files/index');
         }
     }
     

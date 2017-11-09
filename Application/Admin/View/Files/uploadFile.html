@@ -55,7 +55,6 @@
 <script type="text/javascript">
 	$(function() {
 		$("#uploader_files").on("change",function() {
-alert($("#uploader_files").val());
 				$("#show_file").html($("#uploader_files").val());
 		});
 	});
@@ -67,16 +66,16 @@ alert($("#uploader_files").val());
 			<strong><span class="icon-pencil-square-o"></span>批量导入客户</strong>
 		</div>
 		<div class="body-content">
-			<form method="post" class="form-x" id="uploadFile" name="uploadFile" action="uploadFile" enctype="multipart/form-data"  target="left" >
+			<form method="post" class="form-x" id="uploadFile" name="uploadFile" action="/Files/uploadFile" enctype="multipart/form-data">
 				<div class="form-group">
 					<div class="label">
 						<label>预览图片：</label>
 					</div>
 					<div class="field">
 						<div id="up_btn" class="btn">
-							<span>导入Excel</span> <input id="uploader_files" type="file" name="uploader_files" />
+							<span>导入Excel</span> <input id="uploader_files" type="file" name="uploader_files" accept="text/csv,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
 						</div>
-						<p>最大5MB，支持jpg，gif，png格式。</p>
+						<p>最大5MB，支持*.xlsx，*.xls，*.csv格式。</p>
 						<div id="show_file"></div>
 					</div>
 				</div>

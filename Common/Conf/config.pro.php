@@ -2,10 +2,10 @@
 return array(
 	//'配置项'=>'配置值'
     'DB_TYPE'           =>  'mysql',     	// 数据库类型
-    'DB_HOST'           =>  '192.168.4.25', 	// 服务器地址
+    'DB_HOST'           =>  '192.168.150.22', 	// 服务器地址
     'DB_NAME'           =>  'netdisk',        // 数据库名
-    'DB_USER'           =>  'hzshark',     	// 用户名
-    'DB_PWD'            =>  'ssqian123',     	// 密码
+    'DB_USER'           =>  'netdisk',     	// 用户名
+    'DB_PWD'            =>  'aerohive',     	// 密码
     'DB_PORT'           =>  '3306',     	// 端口
     'DB_PREFIX'         =>  '',      	// 数据库表前缀
     'DB_DEBUG'  		=>  true, 			// 数据库调试模式 开启后可以记录SQL日志
@@ -65,7 +65,7 @@ return array(
     'IOS_DOWNLOAD_URL' => '#',
     'ANDROID_DOWNLOAD_URL' =>'http://t.cn/Rq8E6QI',
     
-    'UPLOAD_PATH' => './Uploads/',
+    'UPLOAD_PATH' => '/Uploads/',
     'UPLOAD_MAX_SIZE' => '52428800',
     'IOS_DOWNLOAD_URL' => '#',
 

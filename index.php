@@ -28,7 +28,6 @@ define('BIND_MODULE','Admin');
 define('BUILD_CONTROLLER_LIST','Index,User,Files');
 define('BUILD_MODEL_LIST','Index,User,Files');
 
-
 # the custom variables
 define('PAGE_SIZE', 15);
 define('CR', "\r");
