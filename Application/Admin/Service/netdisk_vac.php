@@ -549,32 +549,32 @@ class netdiskVAC extends Tlv
     }
 }
 
-echo "*********************";
-echo PHP_EOL;
+// echo "*********************";
+// echo PHP_EOL;
 
-echo "*********************";
-echo PHP_EOL;
+// echo "*********************";
+// echo PHP_EOL;
 
 
-$vac = new netdiskVAC();
-$vac->connectionSocket();
-$bind_pud = $vac->bind();
-$res = $vac->socksend($bind_pud);
-echo PHP_EOL;
-var_dump($res);
-echo PHP_EOL;
-$UMobile = '18699111272';
-$Operation_Type = 1;
-$fee = 900;
+// $vac = new netdiskVAC();
+// $vac->connectionSocket();
+// $bind_pud = $vac->bind();
+// $res = $vac->socksend($bind_pud);
+// echo PHP_EOL;
+// var_dump($res);
+// echo PHP_EOL;
+// $UMobile = '18699111272';
+// $Operation_Type = 1;
+// $fee = 900;
 
-$check_data = $vac->CheckPrice($UMobile, $Operation_Type);
-$ret_check = $vac->socksend($check_data);
-echo PHP_EOL;
-var_dump($ret_check);
-// $unbind = $vac->unbind();
-// $unres = $vac->socksend($unbind);
-// var_dump($unres);
-// $vac->closeSocket();
+// $check_data = $vac->CheckPrice($UMobile, $Operation_Type);
+// $ret_check = $vac->socksend($check_data);
+// echo PHP_EOL;
+// var_dump($ret_check);
+// // $unbind = $vac->unbind();
+// // $unres = $vac->socksend($unbind);
+// // var_dump($unres);
+// // $vac->closeSocket();
 
 
 

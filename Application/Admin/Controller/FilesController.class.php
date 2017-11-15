@@ -11,12 +11,6 @@ class FilesController extends Controller
     public function index()
     {
     header("Content-Type:text/html; charset=utf-8");
-    $data_list = [];
-    if (IS_POST){
-
-
-
-    }
     $this->display('uploadFile', 'UTF-8');
 
     
@@ -77,15 +71,18 @@ class FilesController extends Controller
 //         var_dump($highestRow);
 //         var_dump($highestColumn);
         //循环读取excel文件,读取一条,插入一条
-        $data=array();
-        //从第1nage 行开始读取数据
-        for($j=1;$j<=$highestRow;$j++){
+        
+        $body=array();
+        //从第1行开始读取数据
+        $header= $objPHPExcel->getActiveSheet()->getCell("A1")->getValue();
+        //从第2行开始读取数据
+        for($j=2;$j<=$highestRow;$j++){
             //从A列读取数据
-            for($k='A';$k<=$highestColumn;$k++){
-                // 读取单元格
-                $data[$j][]=$objPHPExcel->getActiveSheet()->getCell("$k$j")->getValue();
-            }
+            // 读取单元格
+            $body[$j]['id']=$j-1;
+            $body[$j]['mobile']=$objPHPExcel->getActiveSheet()->getCell("A$j")->getValue();        
         }
+        $data = array('header'=>$header, 'body'=>$body);
         
         return $data;
     }
@@ -98,24 +95,37 @@ class FilesController extends Controller
         $excel_data = array();
         if (0 == $info["status"]) {
             $files = $info['msg'];
-            foreach ($files as $filename){
-                $file_data = $this->paseExcelFile($filename);
-                $excel_data = array_merge($file_data, $excel_data);
+            $filename = $files[0];
+            $data = $this->paseExcelFile($filename);
+            
+            if ('mobile' != strtolower($data['header']) && '手机号' != strtolower($data['header']) ){
+                exit(1);
+                $this->error("文件內容格式错误，请重新上传",'/Files/index');
             }
-            
-            
-            $this->assign("excel_data", $excel_data);
-            
-            $this->display();
-            
-            $capacity = 8 * 1024 * 1024 * 1024;
-            //$reg_ret = $user->RegistUser($umobile, $password, $capacity);
-            echo "====================";
-            var_dump($excel_data);
-            $this->show($excel_data);
+            session("add_users", $data['body']);
+            session("user_count", count($data['body']));
+            $this->assign("user_list", $data['body']);
+            $this->assign("user_count", count($data['body']));
+            $this->display('userlist','utf-8');
         }else{
             $this->error("文件上传失败，请重新上传",'/Files/index');
         }
+    }
+    
+    public function createUser(){
+        header("Content-Type:text/html; charset=utf-8");
+        $users = session('add_users');
+//         var_dump($users);
+        $result = array();
+        foreach ($users as $user){
+            $mobile = $user['mobile'];
+            $status = rand(0, 1);
+            $user['status'] = $status;
+            $result [] = $user;
+        }
+        $this->assign("user_list", $result);
+        $this->assign("user_count", count($result));
+        $this->display('createlist','utf-8');
     }
     
 }
