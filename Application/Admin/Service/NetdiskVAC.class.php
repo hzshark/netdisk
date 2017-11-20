@@ -1,5 +1,5 @@
 <?php
-namespace lib;
+namespace Admin\Service;
 
 date_default_timezone_set('Asia/Shanghai');
 

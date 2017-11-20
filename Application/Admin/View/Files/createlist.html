@@ -115,7 +115,7 @@ table {
     <tr>
     	<td>{$vo.id}</td>
         <td>{$vo.mobile}</td>
-        <td>    <if condition="$vo.status eq 0 "><div style="color:#F00"><b>{$vo.msg}</b></div>    <else /> <div style="color:#00FF00">成功</div>    </if></td>
+        <td>    <if condition="$vo.status eq 0 "><div style="color:#00FF00">成功</div>    <else /> <div style="color:#F00"><b>{$vo.msg}</b></div>    </if></td>
     </tr>
     </foreach>
 </table>

@@ -1,7 +1,9 @@
 <?php
 namespace Admin\Service;
+
+require_once __DIR__.'/NetdiskVAC.class.php';
 use Admin\Model\FileModel;
-use netdiskVAC;
+use Admin\Service\netdiskVAC;
 
 class Files {
 
@@ -10,7 +12,7 @@ class Files {
     }
 
     function setUserVAC($mobile, $status, $msg){
-        $myDao =  D('UserVN');
+        $myDao =  D('UserVNC');
         $data['indate'] = $this->currentDate();
         $data['mobile'] = $mobile;
         $data['status'] = $status;
@@ -98,18 +100,11 @@ class Files {
             $vac->connectionSocket();
             $bind_pud = $vac->bind();
             $res = $vac->socksend($bind_pud);
+
             if ($res[4] == 0) {
                 $check_data = $vac->CheckPrice($umobile, $operationType);
                 $ret_check = $vac->socksend($check_data);
-                if ($res[4] == 0) {
-                    $unbind = $vac->unbind();
-                    $unres = $vac->socksend($unbind);
-                     if ($res[4] != 0) {
-                         $ret = array(
-                             'status' => 2,
-                             'msg' => '鉴权接口解绑失败,错误码:' . $res[4]
-                         );
-                     }
+                if ($ret_check[4] == 0) {
                     $vac->closeSocket();
                     $ret = array(
                         'status' => 0,
@@ -118,7 +113,16 @@ class Files {
                 } else {
                     $ret = array(
                         'status' => 2,
-                        'msg' => 'VAC鉴权接口调用出错,错误码:' . $res[4]
+                        'msg' => 'VAC鉴权接口调用出错,错误码:' . $ret_check[4]
+                    );
+                }
+
+                $unbind = $vac->unbind();
+                $unres = $vac->socksend($unbind);
+                if ($unres[4] != 0) {
+                    $ret = array(
+                        'status' => 2,
+                        'msg' => $ret['msg'].' 鉴权接口解绑失败,错误码:' . $unres[4]
                     );
                 }
             } else {
@@ -127,6 +131,7 @@ class Files {
                     'msg' => '连接绑定VAC接口失败!错误码:=>' . $res[4]
                 );
             }
+            return $ret;
     }
 
 }
