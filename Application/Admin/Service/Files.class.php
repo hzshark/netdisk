@@ -1,6 +1,7 @@
 <?php
 namespace Admin\Service;
 use Admin\Model\FileModel;
+use netdiskVAC;
 
 class Files {
 
@@ -40,7 +41,7 @@ class Files {
         var_dump($data);
         return $model->add($data);
     }
-    
+
     public function Webuploader()
     {
         $uploadconfig = array(
@@ -82,34 +83,41 @@ class Files {
             );
         }
     }
-    
-    public function createUserByVac(){
-        echo "*********************";
-        echo PHP_EOL;
-        
-        echo "*********************";
-        echo PHP_EOL;
-        
-        
-        $vac = new netdiskVAC();
-        $vac->connectionSocket();
-        $bind_pud = $vac->bind();
-        $res = $vac->socksend($bind_pud);
-        echo PHP_EOL;
-        var_dump($res);
-        echo PHP_EOL;
-        $UMobile = '18699111272';
-        $Operation_Type = 1;
-        $fee = 900;
-        
-        $check_data = $vac->CheckPrice($UMobile, $Operation_Type);
-        $ret_check = $vac->socksend($check_data);
-        echo PHP_EOL;
-        var_dump($ret_check);
-        // $unbind = $vac->unbind();
-        // $unres = $vac->socksend($unbind);
-        // var_dump($unres);
-        // $vac->closeSocket();
+
+    public function createUserByVac($umobile, $operationType){
+            $vac = new netdiskVAC();
+            $vac->connectionSocket();
+            $bind_pud = $vac->bind();
+            $res = $vac->socksend($bind_pud);
+            if ($res[4] == 0) {
+                $check_data = $vac->CheckPrice($umobile, $operationType);
+                $ret_check = $vac->socksend($check_data);
+                if ($res[4] == 0) {
+                    $unbind = $vac->unbind();
+                    $unres = $vac->socksend($unbind);
+                     if ($res[4] != 0) {
+                         $ret = array(
+                             'status' => 2,
+                             'msg' => '鉴权接口解绑失败,错误码:' . $res[4]
+                         );
+                     }
+                    $vac->closeSocket();
+                    $ret = array(
+                        'status' => 0,
+                        'msg' => 'VAC调用成功'
+                    );
+                } else {
+                    $ret = array(
+                        'status' => 2,
+                        'msg' => 'VAC鉴权接口调用出错,错误码:' . $res[4]
+                    );
+                }
+            } else {
+                $ret = array(
+                    'status' => 2,
+                    'msg' => '连接绑定VAC接口失败!错误码:=>' . $res[4]
+                );
+            }
     }
 
 }

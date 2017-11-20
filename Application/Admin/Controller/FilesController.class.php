@@ -13,7 +13,7 @@ class FilesController extends Controller
     header("Content-Type:text/html; charset=utf-8");
     $this->display('uploadFile', 'UTF-8');
 
-    
+
 //     $md5file = md5_file($file_name);
 
 //     $tableName = 'excl_file';
@@ -30,13 +30,13 @@ class FilesController extends Controller
 
 
     }
-    
-    
+
+
     function paseExcelFile($file_name){
 //         $file_name = __DIR__.'/test.xlsx';
-        
+
         $extension = strtolower( pathinfo($file_name, PATHINFO_EXTENSION) );
-        
+
         ini_set('max_execution_time', '0');
 //         Vendor('PHPExcel.PHPExcel');
         Vendor('PHPExcel.PHPExcel');
@@ -60,7 +60,7 @@ class FilesController extends Controller
             //默认的分隔符
             $PHPReader->setDelimiter(',');
         }
-        
+
         // 判断使用哪种格式
         $objPHPExcel = $objReader->load($file_name,$encode='utf-8');
         $sheet = $objPHPExcel->getSheet(0);
@@ -71,7 +71,7 @@ class FilesController extends Controller
 //         var_dump($highestRow);
 //         var_dump($highestColumn);
         //循环读取excel文件,读取一条,插入一条
-        
+
         $body=array();
         //从第1行开始读取数据
         $header= $objPHPExcel->getActiveSheet()->getCell("A1")->getValue();
@@ -80,13 +80,13 @@ class FilesController extends Controller
             //从A列读取数据
             // 读取单元格
             $body[$j]['id']=$j-1;
-            $body[$j]['mobile']=$objPHPExcel->getActiveSheet()->getCell("A$j")->getValue();        
+            $body[$j]['mobile']=$objPHPExcel->getActiveSheet()->getCell("A$j")->getValue();
         }
         $data = array('header'=>$header, 'body'=>$body);
-        
+
         return $data;
     }
-    
+
     public function uploadFile()
     {
         header("Content-Type:text/html; charset=utf-8");
@@ -97,7 +97,7 @@ class FilesController extends Controller
             $files = $info['msg'];
             $filename = $files[0];
             $data = $this->paseExcelFile($filename);
-            
+
             if ('mobile' != strtolower($data['header']) && '手机号' != strtolower($data['header']) ){
                 exit(1);
                 $this->error("文件內容格式错误，请重新上传",'/Files/index');
@@ -111,21 +111,24 @@ class FilesController extends Controller
             $this->error("文件上传失败，请重新上传",'/Files/index');
         }
     }
-    
+
     public function createUser(){
         header("Content-Type:text/html; charset=utf-8");
         $users = session('add_users');
-//         var_dump($users);
+        //用户鉴权operationType = 1;
+        $operationType = 1;
+        $f = new Files();
         $result = array();
         foreach ($users as $user){
             $mobile = $user['mobile'];
-            $status = rand(0, 1);
-            $user['status'] = $status;
+            $ret = $f->createUserByVac($mobile, $operationType);
+            $user['status'] = $ret['status'];
+            $user['msg'] = $ret['msg'];
             $result [] = $user;
         }
         $this->assign("user_list", $result);
         $this->assign("user_count", count($result));
         $this->display('createlist','utf-8');
     }
-    
+
 }
