@@ -9,6 +9,15 @@ class Files {
         return date("Y-m-d H:i:s");
     }
 
+    function setUserVAC($mobile, $status, $msg){
+        $myDao =  D('UserVN');
+        $data['indate'] = $this->currentDate();
+        $data['mobile'] = $mobile;
+        $data['status'] = $status;
+        $data['msg'] = $msg;
+        $myDao->add($data);
+    }
+
     function queryFileById($tableName) {
         $model = new FileModel($tableName);
         return false;

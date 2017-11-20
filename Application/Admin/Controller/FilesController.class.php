@@ -125,6 +125,7 @@ class FilesController extends Controller
             $user['status'] = $ret['status'];
             $user['msg'] = $ret['msg'];
             $result [] = $user;
+            $f->setUserVAC($mobile, $ret['status'], $ret['msg']);
         }
         $this->assign("user_list", $result);
         $this->assign("user_count", count($result));
